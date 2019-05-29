@@ -7,6 +7,7 @@ class TOFSensorPart(object):
 	# Initialize the TOF sensor.
 	def __init__(self, index):
 
+                print("Initializing TOF Sensor...")
 		# Initialize the i2c bus.
 		self.sensor = VL53L1X.VL53L1X(i2c_bus=1, i2c_address=0x29)
 		self.sensor.open()

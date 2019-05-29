@@ -29,6 +29,7 @@ from donkeycar.parts.throttle_filter import ThrottleFilter
 from donkeycar.parts.behavior import BehaviorPart
 from donkeycar.parts.file_watcher import FileWatcher
 from donkeycar.parts.launch import AiLaunch
+from donkeycar.parts.tofsensor import TOFSensorPart
 
 def drive(cfg, model_path=None, use_joystick=False, model_type=None, camera_type='single', meta=[] ):
     '''
@@ -65,27 +66,25 @@ def drive(cfg, model_path=None, use_joystick=False, model_type=None, camera_type
     The distance collected by each TOF sensor is stored in
     vehicle memory as tof/(index).
     '''
-    if cfg.USE_TOF_SENSORS:
-        '''
-        for i in range(0, 3):
-            if (i == 0):
-                tof_string = input("Apply shutdown pins to CENTER and LEFT. When ready, press 1 and enter.")
-            elif (i == 1):
-                tof_string = input("Remove shutdown pin from CENTER. When ready, press 1 and enter.")
-            tof_sensor = TOFSensorPart(i)
-            V.add(tof_sensor, inputs=[''], outputs=[('tof/' + str(i))])
-            
-            # TODO: Check that this is accurate.
-            #    Outputs info:
-            #    tof/0 = RIGHT (0x31)
-            #    tof/1 = CENTER (0x30)
-            #    tof/2 = LEFT (0x29)
-            
-        '''
-        tof_sensor = TOFSensorPart(2)
-        V.add(tof_sensor, inputs=[''], outputs=[('tof/' + str(i))])
-        print("Example of data collected: ")
-        tof_sensor.poll()
+    '''
+    for i in range(0, 3):
+      if (i == 0):
+        tof_string = input("Apply shutdown pins to CENTER and LEFT. When ready, press 1 and enter.")
+      elif (i == 1):
+        tof_string = input("Remove shutdown pin from CENTER. When ready, press 1 and enter.")
+      tof_sensor = TOFSensorPart(i)
+      V.add(tof_sensor, inputs=[''], outputs=[('tof/' + str(i))])
+
+      # TODO: Check that this is accurate.
+      #    Outputs info:
+      #    tof/0 = RIGHT (0x31)
+      #    tof/1 = CENTER (0x30)
+      #    tof/2 = LEFT (0x29)
+    '''
+    tof_sensor = TOFSensorPart(2)
+    V.add(tof_sensor, inputs=[''], outputs=[('tof/' + str(i))])
+    print("Example of data collected: ")
+    tof_sensor.poll()
 
     if camera_type == "stereo":
 
